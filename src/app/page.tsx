@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { faker } from "@faker-js/faker";
@@ -13,38 +13,40 @@ import Banner from "@/components/Banner";
 import { FaTrashAlt } from "react-icons/fa";
 
 import bookmarkJson from "@/__mock__/bookmark.json";
-// import undrawReading from "@/assets/img/undraw_reading.svg";
 
-type Bookmark = {
-  id: string;
-  title: string;
-  author: string;
-  thumbnail: string;
-  date: Date | string;
-  episode: string;
-};
+import { Bookmark } from "@/@types/bookmark";
+
+const bannerImages = [
+  "https://swiperjs.com/demos/images/nature-1.jpg",
+  "https://swiperjs.com/demos/images/nature-2.jpg",
+  "https://swiperjs.com/demos/images/nature-3.jpg",
+  "https://swiperjs.com/demos/images/nature-4.jpg",
+];
 
 export default function Home() {
-  const [bookmark, setBookmark] = useState<Bookmark[]>(bookmarkJson);
+  const [bookmarks, setBookmark] = useState<Bookmark[]>(bookmarkJson);
+  const [selectedBookmarks, setSelectedBookmarks] = useState<Bookmark[]>([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [selected, setSelected] = useState<Bookmark[]>([]);
 
-  const handleSelect = (selectBookmark: Bookmark) => {
-    if (selected.includes(selectBookmark)) {
-      setSelected(selected.filter((b) => b.id !== selectBookmark.id));
+  const handleSelectBookmark = (selectBookmark: Bookmark) => {
+    if (selectedBookmarks.includes(selectBookmark)) {
+      setSelectedBookmarks(
+        selectedBookmarks.filter((b) => b.id !== selectBookmark.id)
+      );
     } else {
-      setSelected([...selected, selectBookmark]);
+      setSelectedBookmarks([...selectedBookmarks, selectBookmark]);
     }
   };
 
-  const handleRemove = () => {
-    setBookmark(bookmark.filter((i) => !selected.includes(i)));
-    setSelected([]);
+  const handleRemoveBookmark = () => {
+    setBookmark(bookmarks.filter((i) => !selectedBookmarks.includes(i)));
+    setSelectedBookmarks([]);
+    setIsEditing(false);
   };
 
   const handleBookmarkNovel = () => {
     setBookmark([
-      ...bookmark,
+      ...bookmarks,
       // Create a new novel with dummy data to add to the bookmark list
       {
         id: uuidv4(),
@@ -57,14 +59,10 @@ export default function Home() {
     ]);
   };
 
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
-
   return (
     <main>
       <div className="h-[300px]">
-        <Banner />
+        <Banner images={bannerImages} />
       </div>
       <div className="px-3 sm:px-0 container mx-auto">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
@@ -73,7 +71,7 @@ export default function Home() {
         <hr />
         <div className="flex items-center justify-between mt-6">
           <span className="text-sm font-light">
-            จํานวนทั้งหมด {bookmark.length} รายการ
+            จํานวนทั้งหมด {bookmarks.length} รายการ
           </span>
 
           <div className="flex">
@@ -83,27 +81,29 @@ export default function Home() {
 
             {isEditing ? (
               <Button
-                onClick={() => handleRemove()}
-                disabled={selected.length <= 0}
+                onClick={() => handleRemoveBookmark()}
+                disabled={selectedBookmarks.length <= 0}
               >
                 <FaTrashAlt />
-                {selected.length > 0 ? `${selected.length} รายการ` : ""}
+                {selectedBookmarks.length > 0
+                  ? `${selectedBookmarks.length} รายการ`
+                  : ""}
               </Button>
             ) : null}
           </div>
         </div>
-        {bookmark.length > 0 ? (
+        {bookmarks.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-6">
-            {bookmark.map((novel) => (
+            {bookmarks.map((bookmark) => (
               <Card
-                key={novel.id}
-                title={novel.title}
-                author={novel.author}
-                thumbnail={novel.thumbnail}
-                date={novel.date}
-                episode={novel.episode}
+                key={bookmark.id}
+                title={bookmark.title}
+                author={bookmark.author}
+                thumbnail={bookmark.thumbnail}
+                date={bookmark.date}
+                episode={bookmark.episode}
                 isEditing={isEditing}
-                onSelect={() => handleSelect(novel)}
+                onSelect={() => handleSelectBookmark(bookmark)}
               />
             ))}
           </div>

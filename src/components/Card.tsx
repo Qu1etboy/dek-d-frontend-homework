@@ -7,16 +7,13 @@ import { FaBookmark } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 import Select from "./Select";
 import { th } from "date-fns/locale";
+import { Bookmark } from "@/@types/bookmark";
+import Link from "next/link";
 
 type CardProps = {
-  thumbnail: string;
-  title: string;
-  author: string;
-  episode: string;
-  date: Date | string;
   isEditing?: boolean;
   onSelect: () => void;
-};
+} & Omit<Bookmark, "id">;
 
 function truncate(str: string, n: number) {
   return str.length > n ? str.slice(0, n - 1) + "..." : str;
@@ -33,14 +30,19 @@ export default function Card(props: CardProps) {
         height={300}
         src={thumbnail}
         alt={title + "'s thumbnail"}
-        className="rounded-lg"
+        className="rounded-lg hover:opacity-75 cursor-pointer duration-300"
       />
       <div className="relative w-full pr-12">
         <div>
-          <h2 className="md:text-lg font-semibold text-primary">
+          <h2 className="md:text-lg font-semibold text-primary hover:opacity-75 cursor-pointer duration-300 leading-tight">
             {truncate(title, 45)}
           </h2>
-          <p className="mt-2 font-light">{author}</p>
+          <Link
+            href="#"
+            className="mt-2 font-light hover:text-orange-500 duration-300"
+          >
+            {author}
+          </Link>
         </div>
         <div className="absolute bottom-0 text-secondary">
           <p className="flex items-center gap-2 text-sm">

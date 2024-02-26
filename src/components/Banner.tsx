@@ -3,7 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Pagination, Navigation } from "swiper/modules";
 
-export default function Banner() {
+type BannerProps = {
+  images: string[];
+};
+
+export default function Banner(props: BannerProps) {
+  const { images } = props;
+
   return (
     <Swiper
       slidesPerView={1}
@@ -26,18 +32,11 @@ export default function Banner() {
         },
       }}
     >
-      <SwiperSlide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-      </SwiperSlide>
+      {images.map((image) => (
+        <SwiperSlide key={image}>
+          <img src={image} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }
