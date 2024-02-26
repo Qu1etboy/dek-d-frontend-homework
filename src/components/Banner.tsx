@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Pagination, Navigation } from "swiper/modules";
+import Link from "next/link";
 
 type BannerProps = {
   images: string[];
@@ -34,7 +35,9 @@ export default function Banner(props: BannerProps) {
     >
       {images.map((image) => (
         <SwiperSlide key={image}>
-          <img src={image} />
+          <Link target="_blank" href={image}>
+            <img src={image} />
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>

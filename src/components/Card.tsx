@@ -15,27 +15,25 @@ type CardProps = {
   onSelect: () => void;
 } & Omit<Bookmark, "id">;
 
-function truncate(str: string, n: number) {
-  return str.length > n ? str.slice(0, n - 1) + "..." : str;
-}
-
 export default function Card(props: CardProps) {
   const { thumbnail, title, author, episode, date, isEditing, onSelect } =
     props;
 
   return (
     <div className="relative w-full flex gap-2">
-      <Image
-        width={200}
-        height={300}
-        src={thumbnail}
-        alt={title + "'s thumbnail"}
-        className="rounded-lg hover:opacity-75 cursor-pointer duration-300"
-      />
+      <Link href="#">
+        <Image
+          width={200}
+          height={300}
+          src={thumbnail}
+          alt={title + "'s thumbnail"}
+          className="rounded-lg hover:opacity-75 cursor-pointer duration-300"
+        />
+      </Link>
       <div className="relative w-full pr-12">
         <div>
-          <h2 className="md:text-lg font-semibold text-primary hover:opacity-75 cursor-pointer duration-300 leading-tight">
-            {truncate(title, 45)}
+          <h2 className="line-clamp-2 text-wrap md:text-lg font-semibold text-primary hover:opacity-75 cursor-pointer duration-300">
+            <Link href="#">{title}</Link>
           </h2>
           <Link
             href="#"

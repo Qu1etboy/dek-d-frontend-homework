@@ -62,83 +62,90 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <>
       <div className="h-[300px]">
         <Banner images={bannerImages} />
       </div>
-      <div className="px-3 sm:px-0 container mx-auto">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
+      <main className="px-3 sm:px-0">
+        <h1 className="container mx-auto text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
           รายการที่คั่นไว้
         </h1>
         <hr />
-        <div className="flex items-center justify-between mt-6">
-          <span className="text-sm font-light">
-            จํานวนทั้งหมด {bookmarks.length} รายการ
-          </span>
+        <section className="container mx-auto mt-6">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-light">
+              จํานวนทั้งหมด {bookmarks.length} รายการ
+            </span>
 
-          <div className="flex">
-            <Button onClick={() => setIsEditing(!isEditing)}>
-              {isEditing ? "ยกเลิก" : "แก้ไข"}
-            </Button>
+            <div className="flex">
+              <Button onClick={() => setIsEditing(!isEditing)}>
+                {isEditing ? "ยกเลิก" : "แก้ไข"}
+              </Button>
 
-            {isEditing ? (
-              <ConfirmationModal
-                onAccept={handleRemoveBookmark}
-                showModal={showModal}
-                setShowModal={setShowModal}
-              >
-                <Button
-                  onClick={() => setShowModal(true)}
-                  disabled={selectedBookmarks.length <= 0}
+              {isEditing ? (
+                <ConfirmationModal
+                  onAccept={handleRemoveBookmark}
+                  showModal={showModal}
+                  setShowModal={setShowModal}
                 >
-                  <FaTrashAlt />
-                  {selectedBookmarks.length > 0
-                    ? `${selectedBookmarks.length} รายการ`
-                    : ""}
-                </Button>
-              </ConfirmationModal>
-            ) : null}
+                  <Button
+                    onClick={() => setShowModal(true)}
+                    disabled={selectedBookmarks.length <= 0}
+                  >
+                    <FaTrashAlt />
+                    {selectedBookmarks.length > 0 ? (
+                      <>
+                        {selectedBookmarks.length}{" "}
+                        <span className="hidden md:inline">รายการ</span>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </Button>
+                </ConfirmationModal>
+              ) : null}
+            </div>
           </div>
-        </div>
-        {bookmarks.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-6">
-            {bookmarks.map((bookmark) => (
-              <Card
-                key={bookmark.id}
-                title={bookmark.title}
-                author={bookmark.author}
-                thumbnail={bookmark.thumbnail}
-                date={bookmark.date}
-                episode={bookmark.episode}
-                isEditing={isEditing}
-                onSelect={() => handleSelectBookmark(bookmark)}
+          {bookmarks.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-6">
+              {bookmarks.map((bookmark) => (
+                <Card
+                  key={bookmark.id}
+                  title={bookmark.title}
+                  author={bookmark.author}
+                  thumbnail={bookmark.thumbnail}
+                  date={bookmark.date}
+                  episode={bookmark.episode}
+                  isEditing={isEditing}
+                  onSelect={() => handleSelectBookmark(bookmark)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center mt-12 mb-24">
+              <Image
+                src="/assets/img/undraw_reading.svg"
+                alt="undraw reading"
+                width={300}
+                height={300}
               />
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center mt-12 mb-24">
-            <Image
-              src="/assets/img/undraw_reading.svg"
-              alt="undraw reading"
-              width={300}
-              height={300}
-            />
-            <p className="text-center text-primary text-lg font-semibold mt-6">
-              ไม่พบรายการที่คั่นไว้
-            </p>
-            <p className="text-center text-gray-500">
-              เราได้รวบรวมนิยายคุณภาพเอาไว้มากมาย
-            </p>
-            <p className="text-center text-gray-500">
-              ลองมาหานิยายเรื่องโปรดของคุณกัน
-            </p>
-          </div>
-        )}
-      </div>
+              <p className="text-center text-primary text-lg font-semibold mt-6">
+                ไม่พบรายการที่คั่นไว้
+              </p>
+              <p className="text-center text-gray-500">
+                เราได้รวบรวมนิยายคุณภาพเอาไว้มากมาย
+              </p>
+              <p className="text-center text-gray-500">
+                ลองมาหานิยายเรื่องโปรดของคุณกัน
+              </p>
+            </div>
+          )}
+        </section>
+      </main>
 
       <div className="fixed right-0 bottom-0 m-3">
         <Button onClick={handleBookmarkNovel}>เพิ่มนิยาย</Button>
       </div>
-    </main>
+    </>
   );
 }
