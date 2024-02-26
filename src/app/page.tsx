@@ -82,7 +82,12 @@ export default function Home() {
             </span>
 
             <div className="flex">
-              <Button onClick={() => setIsEditing(!isEditing)}>
+              <Button
+                onClick={() => {
+                  setSelectedBookmarks([]);
+                  setIsEditing(!isEditing);
+                }}
+              >
                 {isEditing ? "ยกเลิก" : "แก้ไข"}
               </Button>
 
@@ -121,6 +126,7 @@ export default function Home() {
                   date={bookmark.date}
                   episode={bookmark.episode}
                   isEditing={isEditing}
+                  isSelected={selectedBookmarks.includes(bookmark)}
                   onSelect={() => handleSelectBookmark(bookmark)}
                 />
               ))}
