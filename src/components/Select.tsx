@@ -2,7 +2,6 @@ import React from "react";
 
 type SelectProps = {
   checked?: boolean;
-  // onSelect: () => void;
 };
 
 export default function Select(props: SelectProps) {
@@ -17,7 +16,6 @@ export default function Select(props: SelectProps) {
           type="checkbox"
           className="before:content[''] peer relative h-[22px] w-[22px] cursor-pointer appearance-none rounded-full border border-orange-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-orange-500 checked:bg-orange-500 checked:before:bg-orange-500 hover:scale-105 hover:before:opacity-0"
           id="customStyle"
-          // onChange={props.onSelect}
           checked={checked}
         />
         <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">

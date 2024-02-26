@@ -1,6 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import Button from "./Button";
 
 type ConfirmationModalProps = {
   children: React.ReactNode;
