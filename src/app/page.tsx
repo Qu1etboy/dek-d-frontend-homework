@@ -15,6 +15,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import bookmarkJson from "@/__mock__/bookmark.json";
 
 import { Bookmark } from "@/@types/bookmark";
+import ConfirmationModal from "@/components/ConfirmationModal";
 
 const bannerImages = [
   "https://swiperjs.com/demos/images/nature-1.jpg",
@@ -27,6 +28,7 @@ export default function Home() {
   const [bookmarks, setBookmark] = useState<Bookmark[]>(bookmarkJson);
   const [selectedBookmarks, setSelectedBookmarks] = useState<Bookmark[]>([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSelectBookmark = (selectBookmark: Bookmark) => {
     if (selectedBookmarks.includes(selectBookmark)) {
@@ -80,15 +82,21 @@ export default function Home() {
             </Button>
 
             {isEditing ? (
-              <Button
-                onClick={() => handleRemoveBookmark()}
-                disabled={selectedBookmarks.length <= 0}
+              <ConfirmationModal
+                onAccept={handleRemoveBookmark}
+                showModal={showModal}
+                setShowModal={setShowModal}
               >
-                <FaTrashAlt />
-                {selectedBookmarks.length > 0
-                  ? `${selectedBookmarks.length} รายการ`
-                  : ""}
-              </Button>
+                <Button
+                  onClick={() => setShowModal(true)}
+                  disabled={selectedBookmarks.length <= 0}
+                >
+                  <FaTrashAlt />
+                  {selectedBookmarks.length > 0
+                    ? `${selectedBookmarks.length} รายการ`
+                    : ""}
+                </Button>
+              </ConfirmationModal>
             ) : null}
           </div>
         </div>
