@@ -9,6 +9,7 @@ import Select from "./Select";
 import { th } from "date-fns/locale";
 import { Bookmark } from "@/@types/bookmark";
 import Link from "next/link";
+import { cn } from "@/utils/cn";
 
 type CardProps = {
   isEditing?: boolean;
@@ -35,7 +36,12 @@ export default function Card(props: CardProps) {
       disabled={!isEditing}
     >
       <div className="relative w-full flex gap-2">
-        <Link href="#">
+        <Link
+          href="#"
+          className={isEditing ? "pointer-events-none" : ""}
+          aria-disabled={isEditing}
+          tabIndex={isEditing ? -1 : undefined}
+        >
           <Image
             width={200}
             height={300}
@@ -47,11 +53,23 @@ export default function Card(props: CardProps) {
         <div className="relative w-full pr-12">
           <div>
             <h2 className="line-clamp-2 text-wrap md:text-lg font-semibold text-primary group-disabled:hover:opacity-75 cursor-pointer duration-300">
-              <Link href="#">{title}</Link>
+              <Link
+                href="#"
+                className={isEditing ? "pointer-events-none" : ""}
+                aria-disabled={isEditing}
+                tabIndex={isEditing ? -1 : undefined}
+              >
+                {title}
+              </Link>
             </h2>
             <Link
               href="#"
-              className="mt-2 font-light group-disabled:hover:text-orange-500 duration-300"
+              className={cn(
+                "mt-2 font-light group-disabled:hover:text-orange-500 duration-300",
+                isEditing ? "pointer-events-none" : ""
+              )}
+              aria-disabled={isEditing}
+              tabIndex={isEditing ? -1 : undefined}
             >
               {author}
             </Link>
