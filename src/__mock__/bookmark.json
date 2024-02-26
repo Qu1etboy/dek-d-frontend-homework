@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "Very long novel title that is too long to fit in the card and will be truncated with an ellipsis at the end of the card.",
     "author": "John Doe",
     "thumbnail": "https://via.placeholder.com/200x300",
@@ -8,7 +8,7 @@
     "date": "2020-01-01"
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "Novel 2",
     "author": "John Doe",
     "thumbnail": "https://via.placeholder.com/200x300",
@@ -16,7 +16,7 @@
     "date": "2020-01-01"
   },
   {
-    "id": 3,
+    "id": "3",
     "title": "Novel 3",
     "author": "John Doe",
     "thumbnail": "https://via.placeholder.com/200x300",

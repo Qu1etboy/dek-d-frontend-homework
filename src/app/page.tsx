@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import { faker } from "@faker-js/faker";
+import { v4 as uuidv4 } from "uuid";
+
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Banner from "@/components/Banner";
@@ -13,11 +16,11 @@ import bookmarkJson from "@/__mock__/bookmark.json";
 // import undrawReading from "@/assets/img/undraw_reading.svg";
 
 type Bookmark = {
-  id: number;
+  id: string;
   title: string;
   author: string;
   thumbnail: string;
-  date: string;
+  date: Date | string;
   episode: string;
 };
 
@@ -37,6 +40,21 @@ export default function Home() {
   const handleRemove = () => {
     setBookmark(bookmark.filter((i) => !selected.includes(i)));
     setSelected([]);
+  };
+
+  const handleBookmarkNovel = () => {
+    setBookmark([
+      ...bookmark,
+      // Create a new novel with dummy data to add to the bookmark list
+      {
+        id: uuidv4(),
+        title: faker.lorem.sentence(),
+        author: faker.person.fullName(),
+        thumbnail: "https://via.placeholder.com/200x300",
+        date: faker.date.anytime(),
+        episode: faker.music.songName(),
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -110,7 +128,9 @@ export default function Home() {
         )}
       </div>
 
-      <Button>เพิ่มนิยาย</Button>
+      <div className="fixed right-0 bottom-0 m-3">
+        <Button onClick={handleBookmarkNovel}>เพิ่มนิยาย</Button>
+      </div>
     </main>
   );
 }

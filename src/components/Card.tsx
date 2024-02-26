@@ -1,16 +1,19 @@
 import React from "react";
 import Image from "next/image";
 
+import { format } from "date-fns";
+
 import { FaBookmark } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 import Select from "./Select";
+import { th } from "date-fns/locale";
 
 type CardProps = {
   thumbnail: string;
   title: string;
   author: string;
   episode: string;
-  date: string;
+  date: Date | string;
   isEditing?: boolean;
   onSelect: () => void;
 };
@@ -46,7 +49,7 @@ export default function Card(props: CardProps) {
           </p>
           <p className="flex items-center gap-2 text-sm">
             <FaBookmark />
-            คั่นล่าสุด {date}
+            คั่นล่าสุด {format(date, "PP / HH:mm น.", { locale: th })}
           </p>
         </div>
       </div>
