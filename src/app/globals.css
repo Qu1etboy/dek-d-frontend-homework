@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-position: center;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  padding: 2rem;
+  color: rgba(0, 0, 0, 0.5) !important;
+  scale: 0.75;
+  border-radius: 100%;
+  transition-duration: 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.swiper-button-prev {
+  background-image: url("/assets/arrow-left.svg");
+}
+
+.swiper-button-next {
+  background-image: url("/assets/arrow-right.svg");
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: "";
+}
+
+.swiper-pagination-bullet {
+  /* background-color: rgba(255, 255, 255, 0.75); */
+  background-color: orange;
+}

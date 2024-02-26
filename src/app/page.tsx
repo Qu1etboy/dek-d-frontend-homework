@@ -1,9 +1,16 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Image from "next/image";
+
 import Button from "@/components/Button";
 import Card from "@/components/Card";
-import { useEffect, useState } from "react";
+import Banner from "@/components/Banner";
+
+import { FaTrashAlt } from "react-icons/fa";
+
 import bookmarkJson from "@/__mock__/bookmark.json";
+// import undrawReading from "@/assets/img/undraw_reading.svg";
 
 type Bookmark = {
   id: number;
@@ -38,9 +45,11 @@ export default function Home() {
 
   return (
     <main>
-      <div></div>
+      <div className="h-[300px]">
+        <Banner />
+      </div>
       <div className="px-3 sm:px-0 container mx-auto">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold my-6 text-primary">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
           รายการที่คั่นไว้
         </h1>
         <hr />
@@ -53,28 +62,55 @@ export default function Home() {
             <Button onClick={() => setIsEditing(!isEditing)}>
               {isEditing ? "ยกเลิก" : "แก้ไข"}
             </Button>
-            {selected.length > 0 && (
-              <Button onClick={() => handleRemove()}>
-                {selected.length} รายการ
+
+            {isEditing ? (
+              <Button
+                onClick={() => handleRemove()}
+                disabled={selected.length <= 0}
+              >
+                <FaTrashAlt />
+                {selected.length > 0 ? `${selected.length} รายการ` : ""}
               </Button>
-            )}
+            ) : null}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-6">
-          {bookmark.map((novel) => (
-            <Card
-              key={novel.id}
-              title={novel.title}
-              author={novel.author}
-              thumbnail={novel.thumbnail}
-              date={novel.date}
-              episode={novel.episode}
-              isEditing={isEditing}
-              onSelect={() => handleSelect(novel)}
+        {bookmark.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-6">
+            {bookmark.map((novel) => (
+              <Card
+                key={novel.id}
+                title={novel.title}
+                author={novel.author}
+                thumbnail={novel.thumbnail}
+                date={novel.date}
+                episode={novel.episode}
+                isEditing={isEditing}
+                onSelect={() => handleSelect(novel)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center mt-12 mb-24">
+            <Image
+              src="/assets/img/undraw_reading.svg"
+              alt="undraw reading"
+              width={300}
+              height={300}
             />
-          ))}
-        </div>
+            <p className="text-center text-primary text-lg font-semibold mt-6">
+              ไม่พบรายการที่คั่นไว้
+            </p>
+            <p className="text-center text-gray-500">
+              เราได้รวบรวมนิยายคุณภาพเอาไว้มากมาย
+            </p>
+            <p className="text-center text-gray-500">
+              ลองมาหานิยายเรื่องโปรดของคุณกัน
+            </p>
+          </div>
+        )}
       </div>
+
+      <Button>เพิ่มนิยาย</Button>
     </main>
   );
 }

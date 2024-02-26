@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Novel 1",
+    "title": "Very long novel title that is too long to fit in the card and will be truncated with an ellipsis at the end of the card.",
     "author": "John Doe",
     "thumbnail": "https://via.placeholder.com/200x300",
     "episode": "Episode 1",
