@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Prompt } from "next/font/google";
 
+import { Toaster } from "react-hot-toast";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -25,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={promt.className}>{children}</body>
+      <body className={promt.className}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }

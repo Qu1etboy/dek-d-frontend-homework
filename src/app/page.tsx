@@ -10,12 +10,13 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Banner from "@/components/Banner";
 
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaPlus } from "react-icons/fa";
 
 import bookmarkJson from "@/__mock__/bookmark.json";
 
 import { Bookmark } from "@/@types/bookmark";
 import ConfirmationModal from "@/components/ConfirmationModal";
+import toast from "react-hot-toast";
 
 const bannerImages = [
   "https://swiperjs.com/demos/images/nature-1.jpg",
@@ -44,6 +45,8 @@ export default function Home() {
     setBookmark(bookmarks.filter((i) => !selectedBookmarks.includes(i)));
     setSelectedBookmarks([]);
     setIsEditing(false);
+
+    toast.success("ลบรายการที่คั่นไว้สำเร็จ");
   };
 
   const handleBookmarkNovel = () => {
@@ -59,6 +62,7 @@ export default function Home() {
         episode: faker.music.songName(),
       },
     ]);
+    toast.success("เพิ่มนิยายเข้ารายการคั่นสำเร็จ");
   };
 
   return (
@@ -144,7 +148,10 @@ export default function Home() {
       </main>
 
       <div className="fixed right-0 bottom-0 m-3">
-        <Button onClick={handleBookmarkNovel}>เพิ่มนิยาย</Button>
+        <Button onClick={handleBookmarkNovel}>
+          <FaPlus />
+          เพิ่มนิยาย
+        </Button>
       </div>
     </>
   );
