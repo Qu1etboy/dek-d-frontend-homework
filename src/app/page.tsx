@@ -3,9 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { faker } from "@faker-js/faker";
-import { v4 as uuidv4 } from "uuid";
-
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Banner from "@/components/Banner";
@@ -14,9 +11,8 @@ import { FaTrashAlt, FaPlus } from "react-icons/fa";
 
 import bookmarkJson from "@/__mock__/bookmark.json";
 
-import { Bookmark } from "@/@types/bookmark";
 import ConfirmationModal from "@/components/ConfirmationModal";
-import toast from "react-hot-toast";
+import { useBookmark } from "@/hooks/useBookmark";
 
 const bannerImages = [
   "https://swiperjs.com/demos/images/nature-1.jpg",
@@ -26,68 +22,36 @@ const bannerImages = [
 ];
 
 export default function Home() {
-  const [bookmarks, setBookmark] = useState<Bookmark[]>(bookmarkJson);
-  const [selectedBookmarks, setSelectedBookmarks] = useState<Bookmark[]>([]);
-  const [isEditing, setIsEditing] = useState(false);
+  const {
+    bookmarks,
+    selectedBookmarks,
+    isEditing,
+    handleSelectBookmark,
+    handleRemoveBookmark,
+    handleBookmarkNovel,
+    toggleEditing,
+  } = useBookmark(bookmarkJson);
+
   const [showModal, setShowModal] = useState(false);
-
-  const handleSelectBookmark = (selectBookmark: Bookmark) => {
-    if (selectedBookmarks.includes(selectBookmark)) {
-      setSelectedBookmarks(
-        selectedBookmarks.filter((b) => b.id !== selectBookmark.id)
-      );
-    } else {
-      setSelectedBookmarks([...selectedBookmarks, selectBookmark]);
-    }
-  };
-
-  const handleRemoveBookmark = () => {
-    setBookmark(bookmarks.filter((i) => !selectedBookmarks.includes(i)));
-    setSelectedBookmarks([]);
-    setIsEditing(false);
-
-    toast.success("ลบรายการที่คั่นไว้สำเร็จ");
-  };
-
-  const handleBookmarkNovel = () => {
-    setBookmark([
-      ...bookmarks,
-      // Create a new novel with dummy data to add to the bookmark list
-      {
-        id: uuidv4(),
-        title: faker.lorem.sentence(),
-        author: faker.person.fullName(),
-        thumbnail: "https://via.placeholder.com/200x300",
-        date: faker.date.anytime(),
-        episode: faker.music.songName(),
-      },
-    ]);
-    toast.success("เพิ่มนิยายเข้ารายการคั่นสำเร็จ");
-  };
 
   return (
     <>
-      <div className="h-[300px]">
+      <div className="h-[330px]">
         <Banner images={bannerImages} />
       </div>
-      <main className="px-3 sm:px-0">
-        <h1 className="container mx-auto text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
+      <main className="px-3">
+        <h1 className="container mx-auto max-w-6xl text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
           รายการที่คั่นไว้
         </h1>
         <hr />
-        <section className="container mx-auto mt-6">
+        <section className="container mx-auto max-w-6xl mt-6">
           <div className="flex items-center justify-between">
             <span className="text-sm font-light">
               จํานวนทั้งหมด {bookmarks.length} รายการ
             </span>
 
             <div className="flex">
-              <Button
-                onClick={() => {
-                  setSelectedBookmarks([]);
-                  setIsEditing(!isEditing);
-                }}
-              >
+              <Button onClick={toggleEditing}>
                 {isEditing ? "ยกเลิก" : "แก้ไข"}
               </Button>
 
