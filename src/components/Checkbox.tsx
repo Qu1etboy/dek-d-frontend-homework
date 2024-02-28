@@ -1,10 +1,10 @@
 import React from "react";
 
-type SelectProps = {
+type CheckboxProps = {
   checked?: boolean;
 };
 
-export default function Select(props: SelectProps) {
+export default function Checkbox(props: CheckboxProps) {
   const { checked } = props;
   return (
     <div className="inline-flex items-center">

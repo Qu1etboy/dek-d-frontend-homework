@@ -4,8 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 
 import Button from "@/components/Button";
-import Card from "@/components/Card";
 import Banner from "@/components/Banner";
+import BookmarkCard from "@/components/BookmarkCard";
 
 import { FaTrashAlt, FaPlus } from "react-icons/fa";
 
@@ -82,7 +82,7 @@ export default function Home() {
           {bookmarks.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-6">
               {bookmarks.map((bookmark) => (
-                <Card
+                <BookmarkCard
                   key={bookmark.id}
                   title={bookmark.title}
                   author={bookmark.author}

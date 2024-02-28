@@ -1,15 +1,16 @@
 import React from "react";
 import Image from "next/image";
 
-import { format } from "date-fns";
-
-import { FaBookmark } from "react-icons/fa";
-import { FaList } from "react-icons/fa";
-import Select from "./Select";
-import { th } from "date-fns/locale";
-import { Bookmark } from "@/@types/bookmark";
 import Link from "next/link";
+
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
+
+import { FaBookmark, FaList } from "react-icons/fa";
+import Checkbox from "./Checkbox";
+
 import { cn } from "@/utils/cn";
+import { Bookmark } from "@/@types/bookmark";
 
 type CardProps = {
   isEditing?: boolean;
@@ -17,7 +18,7 @@ type CardProps = {
   onSelect: () => void;
 } & Omit<Bookmark, "id">;
 
-export default function Card(props: CardProps) {
+export default function BookmarkCard(props: CardProps) {
   const {
     thumbnail,
     title,
@@ -86,7 +87,7 @@ export default function Card(props: CardProps) {
           </div>
         </div>
         <div className="absolute right-0">
-          {isEditing ? <Select checked={isSelected} /> : null}
+          {isEditing ? <Checkbox checked={isSelected} /> : null}
         </div>
       </div>
     </button>
