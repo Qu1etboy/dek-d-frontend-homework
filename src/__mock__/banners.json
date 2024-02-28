@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "image": "https://swiperjs.com/demos/images/nature-1.jpg",
+    "link": "https://swiperjs.com/demos/images/nature-1.jpg"
+  },
+  {
+    "id": 2,
+    "image": "https://swiperjs.com/demos/images/nature-2.jpg",
+    "link": "https://swiperjs.com/demos/images/nature-2.jpg"
+  },
+  {
+    "id": 3,
+    "image": "https://swiperjs.com/demos/images/nature-3.jpg",
+    "link": "https://swiperjs.com/demos/images/nature-3.jpg"
+  },
+  {
+    "id": 4,
+    "image": "https://swiperjs.com/demos/images/nature-4.jpg",
+    "link": "https://swiperjs.com/demos/images/nature-4.jpg"
+  }
+]

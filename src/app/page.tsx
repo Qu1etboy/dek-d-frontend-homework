@@ -9,17 +9,11 @@ import BookmarkCard from "@/components/BookmarkCard";
 
 import { FaTrashAlt, FaPlus } from "react-icons/fa";
 
-import bookmarkJson from "@/__mock__/bookmark.json";
+import bookmarkJson from "@/__mock__/bookmarks.json";
+import banners from "@/__mock__/banners.json";
 
 import ConfirmationModal from "@/components/ConfirmationModal";
 import { useBookmark } from "@/hooks/useBookmark";
-
-const bannerImages = [
-  "https://swiperjs.com/demos/images/nature-1.jpg",
-  "https://swiperjs.com/demos/images/nature-2.jpg",
-  "https://swiperjs.com/demos/images/nature-3.jpg",
-  "https://swiperjs.com/demos/images/nature-4.jpg",
-];
 
 export default function Home() {
   const {
@@ -37,7 +31,7 @@ export default function Home() {
   return (
     <>
       <div className="h-[330px]">
-        <Banner images={bannerImages} />
+        <Banner banners={banners} />
       </div>
       <main className="px-3">
         <h1 className="container mx-auto max-w-6xl text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
