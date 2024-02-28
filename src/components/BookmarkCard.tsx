@@ -78,7 +78,7 @@ export default function BookmarkCard(props: CardProps) {
           <div className="absolute bottom-0 text-secondary">
             <p className="flex items-center gap-2 text-sm">
               <FaList />
-              {episode}
+              <span className="line-clamp-1">{episode}</span>
             </p>
             <p className="flex items-center gap-2 text-sm">
               <FaBookmark />
