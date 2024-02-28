@@ -3,16 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 
+import { FaTrashAlt, FaPlus } from "react-icons/fa";
 import Button from "@/components/Button";
 import Banner from "@/components/Banner";
 import BookmarkCard from "@/components/BookmarkCard";
-
-import { FaTrashAlt, FaPlus } from "react-icons/fa";
+import ConfirmationModal from "@/components/ConfirmationModal";
 
 import bookmarkJson from "@/__mock__/bookmarks.json";
 import banners from "@/__mock__/banners.json";
 
-import ConfirmationModal from "@/components/ConfirmationModal";
 import { useBookmark } from "@/hooks/useBookmark";
 
 export default function Home() {

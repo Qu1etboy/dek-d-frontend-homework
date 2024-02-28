@@ -1,5 +1,3 @@
-import React from "react";
-
 type ConfirmationModalProps = {
   children: React.ReactNode;
   setShowModal: (value: boolean) => void;
