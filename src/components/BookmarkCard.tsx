@@ -38,13 +38,13 @@ export default function BookmarkCard(props: CardProps) {
       <div className="relative w-full flex gap-2">
         <Link
           href="#"
-          className={isEditing ? "pointer-events-none" : ""}
+          className={cn(isEditing ? "pointer-events-none" : "")}
           aria-disabled={isEditing}
           tabIndex={isEditing ? -1 : undefined}
         >
           <Image
-            width={200}
             height={300}
+            width={200}
             src={thumbnail}
             alt={title + "'s thumbnail"}
             className="rounded-lg group-disabled:hover:opacity-75 cursor-pointer duration-300"

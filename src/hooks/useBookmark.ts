@@ -11,7 +11,7 @@ function createDummyBookmark(): Bookmark {
     id: uuidv4(),
     title: faker.lorem.sentence(),
     author: faker.person.fullName(),
-    thumbnail: "https://via.placeholder.com/200x300",
+    thumbnail: faker.image.urlPicsumPhotos({ width: 200, height: 300 }),
     date: faker.date.anytime(),
     episode: faker.music.songName(),
   };

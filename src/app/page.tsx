@@ -32,7 +32,7 @@ export default function Home() {
       <div className="h-[330px]">
         <Banner banners={banners} />
       </div>
-      <main className="px-3">
+      <main className="px-3 mb-24">
         <h1 className="container mx-auto max-w-6xl text-xl md:text-2xl lg:text-3xl font-semibold pt-[55px] my-6 text-primary">
           รายการที่คั่นไว้
         </h1>
@@ -89,7 +89,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center mt-12 mb-24">
+            <div className="flex flex-col items-center mt-12">
               <Image
                 src="/assets/img/undraw_reading.svg"
                 alt="undraw reading"
